@@ -14,7 +14,7 @@
                        th:text="${book.name}">AddressBook Name</a>
                 </div>
                 <th:block th:each="buddy : ${book.buddyInfos}">
-                        <div class="panel-body" th:text="${buddy.name}"></div>
+                        <div class="panel-body" th:text="${buddy.name +'---'+ buddy.address}"></div>
                 </th:block>
             </div>
 
