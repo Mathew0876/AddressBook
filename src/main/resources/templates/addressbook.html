@@ -11,10 +11,10 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <a class="panel-title" data-toggle="collapse"
-                       th:text="${book.name}">AddressBook Name</a>
+                       th:text="${'ID='+book.id +': '+book.name}">AddressBook Name</a>
                 </div>
                 <th:block th:each="buddy : ${book.buddyInfos}">
-                        <div class="panel-body" th:text="${buddy.name +'---'+ buddy.address}"></div>
+                        <div class="panel-body" th:text="${'ID='+buddy.id +': '+ buddy.name +'---'+ buddy.address}"></div>
                 </th:block>
             </div>
 

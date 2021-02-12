@@ -4,6 +4,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Controller
 public class AddressBookController {
 
@@ -21,26 +23,23 @@ public class AddressBookController {
     }
 
     @PostMapping(path = "/addressBooks/{id}/addBuddyInfo")
-    public String addBuddy(@RequestBody BuddyInfo buddyInfo, @PathVariable long id) {
+    public String addBuddy(@RequestBody BuddyInfo buddyInfo, @PathVariable long id, Model model) {
         AddressBook book = addressBookRepository.findById(id);
         book.addBuddy(buddyInfo);
         addressBookRepository.save(book);
+        model.addAttribute("books", addressBookRepository.findById(id));
         return "addressbook";
     }
 
-//    @PostMapping(path = "/addressBooks/addAddressBook")
-//    public String addAddressBook(@RequestBody AddressBook book) {
-//        addressBookRepository.save(book);
-//        return "addressbook";
-//    }
-//
-//    @PostMapping(path = "/addressBooks/{addressid}/{buddyid}")
-//    public AddressBook deleteBuddy(@PathVariable long addressid, long buddyid) {
-//        AddressBook book = repository.findById(addressid);
-//        book.removeBuddy(buddyid);
-//        repository.save(book);
-//        return book;
-//    }
+    @PostMapping(path = "/addressBooks/{addressid}/{buddyid}")
+    public String deleteBuddy(@PathVariable long addressid, @PathVariable long buddyid, Model model) {
+        AddressBook book = addressBookRepository.findById(addressid);
+        book.removeBuddy(buddyid);
+        addressBookRepository.save(book);
+        buddyRepository.deleteById(buddyid);
+        model.addAttribute("books", addressBookRepository.findById(addressid));
+        return "addressbook";
+    }
 
     @GetMapping("/addressbook")
     public String greeting(Model model) {
@@ -48,4 +47,9 @@ public class AddressBookController {
         return "addressbook";
     }
 
+    @GetMapping(value = "/addressbook/{id}")
+    public String displaybuddiesforaddressbook(@PathVariable long id, Model model) {
+        model.addAttribute("books", addressBookRepository.findById(id));
+        return "addressbook";
+    }
 }

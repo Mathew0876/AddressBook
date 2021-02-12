@@ -28,7 +28,6 @@ public class BuddyInfo implements Serializable{
     private String name;
     private String address;
     private String phoneNumber;
-    @JsonBackReference
     @ManyToOne
     private AddressBook addressBook;
 
