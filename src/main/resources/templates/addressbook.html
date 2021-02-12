@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Address Book</title>
+</head>
+<body>
+<div class="col-md-4">
+    <div class="panel-group" id="panel-790692">
+        <th:block th:each="book : ${books}">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <a class="panel-title" data-toggle="collapse"
+                       th:text="${book.name}">AddressBook Name</a>
+                </div>
+                <th:block th:each="buddy : ${book.buddyInfos}">
+                        <div class="panel-body" th:text="${buddy.name}"></div>
+                </th:block>
+            </div>
+
+        </th:block>
+    </div>
+</div>
+</body>
+</html>
