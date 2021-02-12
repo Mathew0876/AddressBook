@@ -1,18 +1,17 @@
-import TheBook.AddressBook;
-import TheBook.BuddyInfo;
+package TheBook;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public class AddressBookTest {
+public class BuddyInfoTest {
 
-    AddressBook addressBook;
-
+    BuddyInfo buddy;
     @Before
     public void setUp() throws Exception {
-        addressBook = new AddressBook("test");
+        buddy = new BuddyInfo("Tom", "Carleton", "613");
     }
 
     @After
@@ -20,26 +19,40 @@ public class AddressBookTest {
     }
 
     @Test
-    public void addBuddy() {
-        BuddyInfo buddy = new BuddyInfo("Fred", "Carleton", "865");
-        addressBook.addBuddy(buddy);
-        //BuddyInfo testBuddy = addressBook.getBuddyInfos().contains(buddy);
-        assertTrue(addressBook.getBuddyInfos().contains(buddy));
+    public void getName() {
+        assertTrue(buddy.getName().equals("Tom"));
     }
 
     @Test
-    public void removeBuddy() {
-        BuddyInfo buddy = new BuddyInfo("Fred", "Carleton", "865");
-        addressBook.addBuddy(buddy);
-        addressBook.removeBuddy(buddy.getId());
-        assertFalse(addressBook.getBuddyInfos().contains(
-                new BuddyInfo("Tom", "Carleton", "613")));
+    public void setName() {
+        buddy.setName("Ted");
+        assertTrue(buddy.getName().equals("Ted"));
+    }
+
+    @Test
+    public void getAddress() {
+        assertTrue(buddy.getAddress().equals("Carleton"));
+    }
+
+    @Test
+    public void setAddress() {
+        buddy.setAddress("Home");
+        assertTrue(buddy.getAddress().equals("Home"));
+    }
+
+    @Test
+    public void getPhoneNumber() {
+        assertTrue(buddy.getPhoneNumber().equals("613"));
     }
 
 //    @Test
-//    public void performJPA() {
+//    public void setPhoneNumber() {
+//        buddy.setPhoneNumber("865");
+//        assertTrue(buddy.getPhoneNumber().equals("865"));
+//    }
 //
-//        // Creating objects representing some products
+//    @Test
+//    public void performJPA() {
 //        BuddyInfo buddy1 = new BuddyInfo();
 //        buddy1.setId(1);
 //        buddy1.setName("Bill");
@@ -64,25 +77,21 @@ public class AddressBookTest {
 //        tx.begin();
 //
 //        // Persisting the product entity objects
-//        addressBook.addBuddy(buddy1);
-//        addressBook.addBuddy(buddy2);
 //        em.persist(buddy1);
 //        em.persist(buddy2);
-//        em.persist(addressBook);
 //
 //        tx.commit();
 //
 //        // Querying the contents of the database using JPQL query
-//        Query q = em.createQuery("SELECT p FROM AddressBook p");
+//        Query q = em.createQuery("SELECT p FROM BuddyInfo p");
 //
 //        @SuppressWarnings("unchecked")
-//        List<AddressBook> results = q.getResultList();
+//        List<BuddyInfo> results = q.getResultList();
 //
-//        System.out.println("List of AddressBooks\n----------------");
+//        System.out.println("List of buddies\n----------------");
 //
-//        for (AddressBook p : results) {
-//            System.out.println(p.getId());
-//            //p.print();
+//        for (BuddyInfo p : results) {
+//            System.out.println(p.getName() + " (id=" + p.getId() + ")");
 //        }
 //
 //        // Closing connection
@@ -90,5 +99,4 @@ public class AddressBookTest {
 //
 //        emf.close();
 //    }
-
 }
