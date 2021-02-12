@@ -15,6 +15,11 @@ public class AddressBookController {
         this.addressBookRepository = addressBookRepository;
     }
 
+    @RequestMapping("/")
+    public @ResponseBody String greeting() {
+        return "Hello, World";
+    }
+
     @PostMapping(path = "/addressBooks/{id}/addBuddyInfo")
     public String addBuddy(@RequestBody BuddyInfo buddyInfo, @PathVariable long id) {
         AddressBook book = addressBookRepository.findById(id);
